@@ -94,6 +94,12 @@ class OnlineSalesRegisterCollector:
                 print(f'+7 {telephone_number}')
         except ValueError as e:
             print(e)
+    @staticmethod
+    def get_date_and_time():
+        date_and_time = []
+        now = datetime.datetime.now()
+        date = []
+        print(now)
 
 
 asd = OnlineSalesRegisterCollector()
@@ -116,3 +122,4 @@ print(asd.twenty_percent_tax_calculation())
 print(asd.ten_percent_tax_calculation())
 print(asd.total_tax())
 OnlineSalesRegisterCollector.get_telephone_number(12345678912)
+OnlineSalesRegisterCollector.get_date_and_time()
