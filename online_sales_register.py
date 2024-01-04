@@ -86,7 +86,7 @@ class OnlineSalesRegisterCollector:
     @staticmethod
     def get_telephone_number(telephone_number):
         try:
-            if not isinstance(telephone_number,int):
+            if not isinstance(telephone_number, int):
                 raise ValueError('Необходимо ввести цифры')
             elif len(str(telephone_number)) > 10:
                 raise ValueError('Необходимо ввести 10 цифр после "+7"')
@@ -94,6 +94,7 @@ class OnlineSalesRegisterCollector:
                 print(f'+7 {telephone_number}')
         except ValueError as e:
             print(e)
+
     @staticmethod
     def get_date_and_time():
         date_and_time = []
