@@ -18,19 +18,29 @@ class OnlineSalesRegisterCollector:
         return self.__number_items
 
     def add_item_to_cheque(self, name):
-        if len(name) == 0 or len(name) > 40:
-            raise ValueError('Нельзя добавить товар, если в его названии нет символов или '
-                             'их больше 40')
-        elif name not in self.__item_price:
-            raise NameError('Позиция отсутствует в товарном справочнике')
-        self.__name_items.append(name)
-        self.__number_items += 1
+        try:
+            if len(name) == 0 or len(name) > 40:
+                raise ValueError('Нельзя добавить товар, если в его названии нет символов или '
+                                 'их больше 40')
+            elif name not in self.__item_price:
+                raise NameError('Позиция отсутствует в товарном справочнике')
+            else:
+                self.__name_items.append(name)
+                self.__number_items += 1
+        except ValueError as e:
+            print(e)
+        except NameError as e:
+            print(e)
 
     def delete_item_from_check(self, name):
-        if name not in self.__name_items:
-            raise NameError('Позиция отсутствует в чеке')
-        self.__name_items.remove(name)
-        self.__number_items -= 1
+        try:
+            if name not in self.__name_items:
+                raise NameError('Позиция отсутствует в чеке')
+            else:
+                self.__name_items.remove(name)
+                self.__number_items -= 1
+        except NameError as e:
+            print(e)
 
     def check_amount(self):
         total = []
@@ -39,7 +49,7 @@ class OnlineSalesRegisterCollector:
             total.append(self.__item_price[item])
         amount = sum(total)
         if len(total) > 10:
-            amount = int(amount-amount * 0.1)
+            amount = amount-amount * 0.1
         return amount
 
     def twenty_percent_tax_calculation(self):
@@ -75,22 +85,24 @@ class OnlineSalesRegisterCollector:
 
     @staticmethod
     def get_telephone_number(telephone_number):
-        if not isinstance(telephone_number,int):
-            raise ValueError('Необходимо ввести цифры')
-        elif len(str(telephone_number)) > 10:
-            raise ValueError('Необходимо ввести 10 цифр после "+7"')
-        else:
-            print(f'+7 {telephone_number}')
+        try:
+            if not isinstance(telephone_number,int):
+                raise ValueError('Необходимо ввести цифры')
+            elif len(str(telephone_number)) > 10:
+                raise ValueError('Необходимо ввести 10 цифр после "+7"')
+            else:
+                print(f'+7 {telephone_number}')
+        except ValueError as e:
+            print(e)
 
 
-#OnlineSalesRegisterCollector.get_telephone_number("ddf")
 asd = OnlineSalesRegisterCollector()
 asd.add_item_to_cheque('чипсы')
 asd.add_item_to_cheque('чипсы')
 asd.add_item_to_cheque('чипсы')
 asd.add_item_to_cheque('чипсы')
 asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('чипсы')
+asd.add_item_to_cheque('чипы')
 asd.add_item_to_cheque('чипсы')
 asd.add_item_to_cheque('кола')
 asd.add_item_to_cheque('чипсы')
@@ -103,4 +115,4 @@ print(asd.check_amount())
 print(asd.twenty_percent_tax_calculation())
 print(asd.ten_percent_tax_calculation())
 print(asd.total_tax())
-
+OnlineSalesRegisterCollector.get_telephone_number(12345678912)
