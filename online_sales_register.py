@@ -91,5 +91,3 @@ class OnlineSalesRegisterCollector:
         for i in range(0, len(date)):
             date_and_time.append(f'{date[i][0]}: {(date[i][1])(now)}')
         return date_and_time
-
-
