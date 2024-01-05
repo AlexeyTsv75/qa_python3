@@ -99,8 +99,15 @@ class OnlineSalesRegisterCollector:
     def get_date_and_time():
         date_and_time = []
         now = datetime.datetime.now()
-        date = []
-        print(now)
+        date = [['часы', lambda x: x.hour], ['минуты', lambda x: x.minute],
+                ['день', lambda x: x.day], ['месяц', lambda x: x.month],
+                ['год', lambda x: x.year]]
+        for i in range(0, 5):
+            y = date[i]
+            z = f'{y[0]} : {(y[1])(now)}'
+            date_and_time.append(z)
+        print(date_and_time)
+        return date_and_time
 
 
 asd = OnlineSalesRegisterCollector()
