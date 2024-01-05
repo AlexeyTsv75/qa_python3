@@ -18,33 +18,24 @@ class OnlineSalesRegisterCollector:
         return self.__number_items
 
     def add_item_to_cheque(self, name):
-        try:
-            if len(name) == 0 or len(name) > 40:
-                raise ValueError('Нельзя добавить товар, если в его названии нет символов или '
-                                 'их больше 40')
-            elif name not in self.__item_price:
-                raise NameError('Позиция отсутствует в товарном справочнике')
-            else:
-                self.__name_items.append(name)
-                self.__number_items += 1
-        except ValueError as e:
-            print(e)
-        except NameError as e:
-            print(e)
+        if len(name) == 0 or len(name) > 40:
+            raise ValueError('Нельзя добавить товар, если в его названии нет символов или '
+                             'их больше 40')
+        elif name not in self.__item_price:
+            raise NameError('Позиция отсутствует в товарном справочнике')
+        else:
+            self.__name_items.append(name)
+            self.__number_items += 1
 
     def delete_item_from_check(self, name):
-        try:
-            if name not in self.__name_items:
-                raise NameError('Позиция отсутствует в чеке')
-            else:
-                self.__name_items.remove(name)
-                self.__number_items -= 1
-        except NameError as e:
-            print(e)
+        if name not in self.__name_items:
+            raise NameError('Позиция отсутствует в чеке')
+        else:
+            self.__name_items.remove(name)
+            self.__number_items -= 1
 
     def check_amount(self):
         total = []
-        amount = 0
         for item in self.__name_items:
             total.append(self.__item_price[item])
         amount = sum(total)
@@ -55,7 +46,6 @@ class OnlineSalesRegisterCollector:
     def twenty_percent_tax_calculation(self):
         twenty_percent_tax = []
         total = []
-        tax_twenty_amount = 0
         for item in self.__name_items:
             if self.__tax_rate[item] == 20:
                 twenty_percent_tax.append(item)
@@ -69,7 +59,6 @@ class OnlineSalesRegisterCollector:
     def ten_percent_tax_calculation(self):
         ten_percent_tax = []
         total = []
-        tax_ten_amount = 0
         for item in self.__name_items:
             if self.__tax_rate[item] == 10:
                 ten_percent_tax.append(item)
@@ -85,15 +74,12 @@ class OnlineSalesRegisterCollector:
 
     @staticmethod
     def get_telephone_number(telephone_number):
-        try:
-            if not isinstance(telephone_number, int):
-                raise ValueError('Необходимо ввести цифры')
-            elif len(str(telephone_number)) > 10:
-                raise ValueError('Необходимо ввести 10 цифр после "+7"')
-            else:
-                print(f'+7 {telephone_number}')
-        except ValueError as e:
-            print(e)
+        if not isinstance(telephone_number, int):
+            raise ValueError('Необходимо ввести цифры')
+        elif len(str(telephone_number)) > 10:
+            raise ValueError('Необходимо ввести 10 цифр после "+7"')
+        else:
+            print(f'+7 {telephone_number}')
 
     @staticmethod
     def get_date_and_time():
@@ -103,29 +89,7 @@ class OnlineSalesRegisterCollector:
                 ['день', lambda x: x.day], ['месяц', lambda x: x.month],
                 ['год', lambda x: x.year]]
         for i in range(0, len(date)):
-            date_and_time.append(f'{date[i][0]} : {(date[i][1])(now)}')
-        print(date_and_time)
+            date_and_time.append(f'{date[i][0]}: {(date[i][1])(now)}')
         return date_and_time
 
 
-asd = OnlineSalesRegisterCollector()
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('чипы')
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('кола')
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('кола')
-asd.add_item_to_cheque('чипсы')
-asd.add_item_to_cheque('молоко')
-print(asd.number_items)
-print(asd.name_items)
-print(asd.check_amount())
-print(asd.twenty_percent_tax_calculation())
-print(asd.ten_percent_tax_calculation())
-print(asd.total_tax())
-OnlineSalesRegisterCollector.get_telephone_number(12345678912)
-OnlineSalesRegisterCollector.get_date_and_time()
