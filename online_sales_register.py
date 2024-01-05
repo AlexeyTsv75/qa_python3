@@ -102,10 +102,8 @@ class OnlineSalesRegisterCollector:
         date = [['часы', lambda x: x.hour], ['минуты', lambda x: x.minute],
                 ['день', lambda x: x.day], ['месяц', lambda x: x.month],
                 ['год', lambda x: x.year]]
-        for i in range(0, 5):
-            y = date[i]
-            z = f'{y[0]} : {(y[1])(now)}'
-            date_and_time.append(z)
+        for i in range(0, len(date)):
+            date_and_time.append(f'{date[i][0]} : {(date[i][1])(now)}')
         print(date_and_time)
         return date_and_time
 
